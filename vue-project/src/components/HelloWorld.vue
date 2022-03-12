@@ -36,6 +36,7 @@ export default {
 
 <template>
   <div class="greetings">
+<<<<<<< HEAD
     <h2>TODO list</h2>
     <!-- prevent form reloading -->
     <form v-on:submit.prevent>
@@ -50,6 +51,13 @@ export default {
       </ul>
     </form>
     {{ $data }}
+=======
+    <h1 class="green">{{ msg }}</h1>
+    <h3>
+      You’ve successfully created a project with
+      <a target="_blank" href="https://vuejs.org/">Vue 3</a>.
+    </h3>
+>>>>>>> cd32c742809f9bc5faa3757b631f30761cface08
   </div>
 </template>
 

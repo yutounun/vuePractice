@@ -3,18 +3,53 @@ defineProps({
   msg: {
     type: String,
     required: true,
-  },
+  }
 });
 </script>
+<script>
+export default {
+  data: () => ({
+    newItem: '',
+    todos: {
+      item: '',
+      isDone: false
+    }
+  }),
+  methods: {
+    addTodo: function() {
+      console.log('debug')
+      if (this.newItem === '') return
+      let todo = {
+        item: this.newItem,
+        isDone: false
+      }
+      this.todos.push(todo)
+      this.newItem = ''
+    },
+    deleteTodo: function(index) {
+      this.todos.splice(index, 1)
+    }
+  }
+}
+</script>
+
 
 <template>
   <div class="greetings">
-    <h1 class="green">{{ msg }}</h1>
-    <h3>
-      You’ve successfully created a project with
-      <a target="_blank" href="https://vitejs.dev/">Vite</a> +
-      <a target="_blank" href="https://vuejs.org/">Vue 3</a>.
-    </h3>
+    <h2>TODO list</h2>
+    <!-- prevent form reloading -->
+    <form v-on:submit.prevent>
+      <input type="text" v-model="newItem">
+      <button @click="addTodo">Add</button>
+      <ul>
+        <li v-for="(todo,index) in todos">
+          <input type="checkbox">
+          {{ todo.item }}
+          <button @click="deleteTodo(index)">delete</button>
+        </li>
+      </ul>
+    </form>
+    {{ $data }}
   </div>
 </template>
 

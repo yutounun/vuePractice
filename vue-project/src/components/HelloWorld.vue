@@ -10,10 +10,7 @@ defineProps({
 export default {
   data: () => ({
     newItem: '',
-    todos: {
-      item: '',
-      isDone: false
-    }
+    todos: []
   }),
   methods: {
     addTodo: function() {
@@ -43,18 +40,20 @@ export default {
       <button @click="addTodo">Add</button>
       <ul>
         <li v-for="(todo,index) in todos">
-          <input type="checkbox" v-model="todos.isDone">
-          <span v-bind="{done: todo.isDone}">{{ todo.item }}</span>
+          <input type="checkbox" v-model="todo.isDone">
+          <span v-bind:class="{ done: todo.isDone }">{{ todo.item }}</span>
           <button @click="deleteTodo(index)">delete</button>
         </li>
       </ul>
     </form>
-    {{ $data }}
   </div>
 </template>
 
 <style scoped>
-.done {
+ul {
+  list-style: none;
+}
+#app li > span.done {
   text-decoration: line-through;
 }
 </style>

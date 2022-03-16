@@ -43,8 +43,8 @@ export default {
       <button @click="addTodo">Add</button>
       <ul>
         <li v-for="(todo,index) in todos">
-          <input type="checkbox">
-          {{ todo.item }}
+          <input type="checkbox" v-model="todos.isDone">
+          <span v-bind="{done: todo.isDone}">{{ todo.item }}</span>
           <button @click="deleteTodo(index)">delete</button>
         </li>
       </ul>
@@ -54,25 +54,7 @@ export default {
 </template>
 
 <style scoped>
-h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
-  top: -10px;
-}
-
-h3 {
-  font-size: 1.2rem;
-}
-
-.greetings h1,
-.greetings h3 {
-  text-align: center;
-}
-
-@media (min-width: 1024px) {
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
-  }
+.done {
+  text-decoration: line-through;
 }
 </style>

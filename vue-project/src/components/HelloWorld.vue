@@ -1,30 +1,18 @@
-<script setup>
-defineProps({
-  msg: {
-    type: String,
-    required: true,
-  }
-});
-</script>
 <script>
 export default {
   data: () => ({
-    newItem: '',
-    todos: []
+    km: 0,
+    m: 0
   }),
-  methods: {
-    addTodo: function() {
-      console.log('debug')
-      if (this.newItem === '') return
-      let todo = {
-        item: this.newItem,
-        isDone: false
-      }
-      this.todos.push(todo)
-      this.newItem = ''
+  // Works when property change
+  watch: {
+    km: function(value) {
+      this.km = value
+      this.m = value * 1000
     },
-    deleteTodo: function(index) {
-      this.todos.splice(index, 1)
+    m: function(value) {
+      this.km = value / 1000
+      this.m = value
     }
   }
 }
@@ -32,20 +20,10 @@ export default {
 
 
 <template>
-  <div class="greetings">
-    <h2>TODO list</h2>
-    <!-- prevent form reloading -->
-    <form v-on:submit.prevent>
-      <input type="text" v-model="newItem">
-      <button @click="addTodo">Add</button>
-      <ul>
-        <li v-for="(todo,index) in todos">
-          <input type="checkbox" v-model="todo.isDone">
-          <span v-bind:class="{ done: todo.isDone }">{{ todo.item }}</span>
-          <button @click="deleteTodo(index)">delete</button>
-        </li>
-      </ul>
-    </form>
+  <div class="wraper">
+    <p><input type="text" v-model="km">km</p>
+    <p><input type="text" v-model="m">m</p>
+    {{ $data }}
   </div>
 </template>
 

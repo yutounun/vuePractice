@@ -8,16 +8,16 @@ export default {
   data: () => ({
     keyword: '',
     error: '',
-    items: []
+    items: [],
+    message: ''
   }),
   mounted: function() {
-    this.keyword = 'JavaScript'
-    this.getData()
+    this.debouncedGetData = _.debounce(this.getData, 1000)
   },
   methods: {
     getData: function() {
       const vm = this
-      const params = { page:1, per_page:1, query: this.keyword }
+      const params = { page:1, per_page:20, query: this.keyword }
       axios.get('https://qiita.com/api/v2/items', { params })
           .then((result) => {
             console.log(result)
@@ -26,6 +26,13 @@ export default {
             vm.message = 'Error' + err
           });
     }
+  },
+  watch: {
+    keyword: function(newValue, oldValue){
+      this.getData()
+      this.message = 'typing...'
+      console.log(newValue)
+    }
   }
 }
 </script>
@@ -33,7 +40,16 @@ export default {
 
 <template>
   <div class="wrapper">
-    {{ items }}
+    <input type="text" v-model="keyword">
+    {{ message }}
+    <ul>
+      <li v-for="item in items">
+        <a :href="item.url">
+          {{ item.title }}
+        </a>
+        likes: {{ item.likes_count }}
+      </li>
+    </ul> 
   </div>
 </template>
 

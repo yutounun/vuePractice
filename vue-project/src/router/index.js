@@ -1,5 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+// use various tools to handle some kinda data structures
+import VueLodash from 'vue-lodash'
+import lodash from 'lodash'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

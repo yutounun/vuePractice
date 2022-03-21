@@ -1,11 +1,14 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
 import HelloWorld from "@/components/HelloWorld.vue";
+import Qiita from "@/components/Qiita.vue";
 </script>
 
 <template>
   <div class="wrapper">
-    <HelloWorld />
+    <!-- TodoApp -->
+    <!-- <HelloWorld /> -->
+    <Qiita />
     <!-- <nav>
       <RouterLink to="/">Home</RouterLink>
       <RouterLink to="/about">About</RouterLink>
